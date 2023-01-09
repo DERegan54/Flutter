@@ -7,7 +7,6 @@
 
 import os
 from unittest import TestCase
-from datetime import datetime
 
 from models import db, User, Message, Follows
 
@@ -42,8 +41,8 @@ class MessageModelTestCase(TestCase):
 
         self.user1 = User.signup(
             username="TestUsername1",
-            email="TestEmail1",
-            password="TestPassword1",
+            email="testu1@email.com",
+            password="HASHED_PASSWORD",
             bio=None,
             location=None,
             image_url=None,
@@ -53,14 +52,14 @@ class MessageModelTestCase(TestCase):
         self.user2 = User.signup(
             username="testUsername2",
             email="TestEmail2",
-            password="TestPassword2",
+            password="HASHED_PASSWORD",
             bio=None,
             location=None,
             image_url=None,
             header_image_url=None
         )
-        db.session.commit() 
 
+        db.session.commit()
         self.client = app.test_client()
 
 
@@ -73,32 +72,97 @@ class MessageModelTestCase(TestCase):
         """Does basic model work?"""
         # Create new messages for user1 and user2
         
-        user1Msg = Message(
-            text="Test message.",
-            timestamp=datetime.utcnow(),
-            user_id=self.user1.id
-        )
-        user2Msg = Message(
-            text="Test message,",
-            timestamp=datetime.utcnow(),
-            user_id=self.user2.id
-        )
-
-        db.session.add([user1Msg,user2Msg])
+        msg1 = Message(text = "Test message 1.", user_id=self.user1.id)
+        msg2 = Message(text = "Test message 2.", user_id=self.user2.id)        
+        
+        db.session.add_all([msg1, msg2])
         db.session.commit()
 
+        
         #Check that the length of message list for users1 == 1
         self.assertEqual(len(self.user1.messages), 1)
         #Check that there is content in user1 message
-        self.assertIn(user1Msg, self.user1.messages)
+        self.assertIn(msg1, self.user1.messages)
         #Check that the text in user1 message is shown
-        self.assertEqual(self.user1.messages[0].text, "Test message.")
+        self.assertEqual(self.user1.messages[0].text, "Test message 1.")
         #Check that the length of message list for user2 == 1
         self.assertEqual(len(self.user2.messages), 1)
         #Check that there is content in user2 message
-        self.assertIn(user2Msg, self.user2.messages)
+        self.assertIn(msg2, self.user2.messages)
         #Check that the text in user2 message is shown 
-        self.assertEqual(self.user2.messages[0].text, "Test message.")
+        self.assertEqual(self.user2.messages[0].text, "Test message 2.")
 
- 
-        
+
+    def test_add_message(self):
+        """Check that messages can be added."""
+
+        #Create new messages for both user1 and user2
+        msg1 = Message(text = "Test message 1.", user_id=self.user1.id)
+        msg2 = Message(text = "Test message 2.", user_id=self.user2.id)        
+        db.session.commit()
+
+        #add msg1 and msg2 to message lists
+        self.user1.messages.append(msg1)
+        self.user2.messages.append(msg2)
+
+        #Check that there is content in msg1 and msg2
+        self.assertIn(msg1, self.user1.messages)
+        self.assertIn(msg2, self.user2.messages)
+
+
+    def test_like_message(self):
+        """Check that messages can be liked and unliked."""
+
+        #Create new messages for both user1 and user2.
+        msg1 = Message(text = "Test message 1.", user_id=self.user1.id)
+        msg2 = Message(text = "Test message 2.", user_id=self.user2.id)        
+        db.session.commit()
+
+        #Add msg2 to user1's liked messages.
+        self.user1.likes.append(msg2)
+        #Add msg1 to user2's liked messages.
+        self.user2.likes.append(msg1)
+
+        #Check that msg2 is in user1's likes list.
+        self.assertIn(msg2, self.user1.likes)
+        #Check that msg1 is in user2's likes list.
+        self.assertIn(msg1, self.user2.likes)
+
+        #Remove msg2 from user1's likes list.
+        self.user1.likes.remove(msg2)  
+        #Remove msg1 from user2's likes list.
+        self.user2.likes.remove(msg1)
+
+        #Check that msg2 is NOT in user1's likes list.
+        self.assertNotIn(msg2, self.user1.likes)
+        #Check that msg1 is NOT in user2's likes list.
+        self.assertNotIn(msg1, self.user2.likes)
+
+
+    def test_delete_message(self):
+        """Check that messages can be deleted."""
+
+         #Create new messages for both user1 and user2.
+        msg1 = Message(text = "Test message 1.", user_id=self.user1.id)
+        msg2 = Message(text = "Test message 2.", user_id=self.user2.id)        
+        db.session.commit()  
+
+        #Add msg2 to user1's liked messages.
+        self.user1.likes.append(msg2)
+        #Add msg1 to user2's liked messages.
+        self.user2.likes.append(msg1)
+
+        #Check that there is content in msg1 and msg2
+        self.assertIn(msg1, self.user1.messages)
+        self.assertIn(msg2, self.user2.messages)
+
+        #Remove msg1 from user1's messages list
+        self.user1.messages.remove(msg1)
+        #Remove msg2 from user2's messages list
+        self.user2.messages.remove(msg2)
+
+        #Check that msg1 is NOT in user1's messages list
+        self.assertNotIn(msg1, self.user1.messages)
+        #Check that msg2 is NOT in user2's messages list
+        self.assertNotIn(msg2, self.user2.messages)
+
