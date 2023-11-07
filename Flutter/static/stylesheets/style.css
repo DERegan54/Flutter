@@ -413,6 +413,7 @@ p.card-bio {
 }
 
 .home-hero .btn {
+  color: #fff;
   background-color: darkviolet;
   text-shadow: none;
   position: relative;
@@ -420,8 +421,6 @@ p.card-bio {
   width: 150px;
   margin-right: -1000px;
 }
-
-
 
 .home-hero h1 {
   margin-bottom: 30rem;
