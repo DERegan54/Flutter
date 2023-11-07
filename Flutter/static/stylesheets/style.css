@@ -386,16 +386,13 @@ p.card-bio {
 /* ============================ Signed out home */
 .welcome {
   color: darkblue;
-  margin-left: -1000px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-style: italic;
   font-size: 80px;
+  margin-left: -1000px;
 }
 
-
-
-.home-hero {
- 
+.home-hero { 
   height: 100vh;
   display: flex;
   justify-content: center;
