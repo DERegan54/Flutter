@@ -422,8 +422,11 @@ p.card-bio {
   margin-right: -1000px;
 }
 
-.home-hero h1 {
+.home-hero h2 {
+  margin-left: -1000px;
   margin-bottom: 30rem;
+  font-size: 80px;
+  color: darkblue;
 }
 
 .home-hero 
