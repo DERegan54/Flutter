@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Warbler</title>
+  <title>Flutter</title>
 
   <link rel="stylesheet"
         href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
@@ -14,7 +14,7 @@
   <link rel="stylesheet"
         href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
   <link rel="stylesheet" href="/static/stylesheets/style.css">
-  <link rel="shortcut icon" href="/static/favicon.ico">
+  <link rel="shortcut icon"/static/images/butterfly-icon.jpeg">
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
@@ -22,15 +22,15 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a href="/" class="navbar-brand">
-        <img src="/static/images/warbler-logo.png" alt="logo">
-        <span>Warbler</span>
+        <img src="/static/images/butterfly-icon.jpeg" alt="logo">
+        <span>Flutter</span>
       </a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       {% if request.endpoint != None %}
       <li>
         <form class="navbar-form navbar-right" action="/users">
-          <input name="q" class="form-control" placeholder="Search Warbler" id="search">
+          <input name="q" class="form-control" placeholder="Search Flutter" id="search">
           <button class="btn btn-default">
             <span class="fa fa-search"></span>
           </button>
