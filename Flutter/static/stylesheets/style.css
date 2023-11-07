@@ -428,7 +428,7 @@ p.card-bio {
 }
 
 .home-hero 
-h4, p, btn {
+h2, h4, p, btn {
   color:darkblue;
   margin-right: -1000px;
 }
