@@ -385,6 +385,16 @@ p.card-bio {
 
 /* ============================ Signed out home */
 
+
+.home-hero h1 {
+  margin-bottom: 30rem;
+}
+
+.home-hero 
+h4, p {
+  color: black;
+}
+
 .home-hero {
   height: 100vh;
   display: flex;
@@ -396,13 +406,13 @@ p.card-bio {
   width: 100vw;
   left: 0;
   z-index: -1;
-  background-image: url("/static/images/signed-out-home.jpg");
+  background-image: url("/static/images/warbler-toon.jpg");
   background-size: cover;
   background-position: center center;
   color: #fff;
   text-align: center;
   padding: 1rem;
-  text-shadow: 0 0 8px #66757f;
+  text-shadow: 0 0 0px #66757f;
 }
 
 .home-hero .btn {
