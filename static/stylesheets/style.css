@@ -416,7 +416,7 @@ h4, p, btn {
   background-image: url("/static/images/butterfly.jpg");
   background-size: cover;
   background-position: center center;
-  color: #fff;
+  color: darkblue;
   text-align: center;
   padding: 1rem;
   text-shadow: 0 0 0px #66757f;
@@ -432,7 +432,7 @@ h4, p, btn {
 }
 
 .home-hero h1 {
-  margin-bottom: 4rem;
+  margin-bottom: 30rem;
 }
 
 .home-hero 
